@@ -526,6 +526,7 @@ class AWLSTM:
                   tra_loss / bat_count, l2 / bat_count, tra_adv / bat_count)
 
             if not tune_para:
+                print("idk why im here")
                 tra_loss = 0.0
                 tra_obj = 0.0
                 l2 = 0.0
@@ -547,7 +548,7 @@ class AWLSTM:
                     l2 += cur_l2
                     tra_obj += cur_obj
                     tra_acc += cur_tra_perf['acc']
-                print('Training:', tra_obj / bat_count, tra_loss / bat_count,
+                print('STRANGE Training:', tra_obj / bat_count, tra_loss / bat_count,
                       l2 / bat_count, '\tTrain per:', tra_acc / bat_count)
 
             # test on validation set
