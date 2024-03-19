@@ -6,6 +6,8 @@ import random
 from sklearn.utils import shuffle
 import tensorflow as tf
 from time import time
+import wandb
+
 try:
     from tensorflow.python.ops.nn_ops import leaky_relu
 except ImportError:
@@ -525,6 +527,7 @@ class AWLSTM:
             print('----->>>>> Training:', tra_obj / bat_count,
                   tra_loss / bat_count, l2 / bat_count, tra_adv / bat_count)
 
+            tra_acc = 0.0
             if not tune_para:
                 print("idk why im here")
                 tra_loss = 0.0
@@ -575,6 +578,16 @@ class AWLSTM:
             cur_test_perf = evaluate(tes_pre, self.tes_gt, self.hinge)
             print('\tTest per:', cur_test_perf, '\tTest loss:', test_loss)
 
+            wandb_dict = {
+                "Validation_Accuracy": cur_valid_perf['acc'],
+                "Test_Accuracy": cur_test_perf['acc'],
+                "Test loss": test_loss,
+                'Val loss:': val_loss,
+                'Train per:': tra_acc / bat_count
+            }
+
+            wandb.log(wandb_dict)
+
             if cur_valid_perf['acc'] > best_valid_perf['acc']:
                 best_valid_perf = copy.copy(cur_valid_perf)
                 best_valid_pred = copy.copy(val_pre)
@@ -609,6 +622,17 @@ class AWLSTM:
                 self.tra_date, self.val_date, self.tes_date, seq=self.paras['seq']
             )
         return True
+
+def init_wandb(name):
+    wandb.login(key="bfb5ff79904cb311842ba49a5060a6ea4d49a48a")
+    return wandb.init(
+        name=name,  ## Wandb creates random run names if you skip this field
+        reinit=True,  ### Allows reinitalizing runs when you re-run this cell
+        # run_id = ### Insert specific run id here if you want to resume a previous run
+        # resume = "must" ### You need this to resume previous runs, but comment out reinit = True when using this
+        project="HW2P2",  ### Project should be created in your wandb account
+        config=None  ### Wandb Config for your run
+    )
 
 if __name__ == '__main__':
     desc = 'the lstm model'
@@ -689,6 +713,7 @@ if __name__ == '__main__':
         reload=args.reload
     )
 
+    run = init_wandb("Baseline-Impl")
     if args.action == 'train':
         pure_LSTM.train()
     elif args.action == 'test':
@@ -702,3 +727,4 @@ if __name__ == '__main__':
         pure_LSTM.predict_adv()
     elif args.action == 'latent':
         pure_LSTM.get_latent_rep()
+    run.finish()
