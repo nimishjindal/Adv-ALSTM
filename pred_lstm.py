@@ -714,7 +714,7 @@ if __name__ == '__main__':
         reload=args.reload
     )
 
-    run = init_wandb("Baseline-Impl")
+    run = init_wandb("Baseline-Impl-kdd17")
     if args.action == 'train':
         pure_LSTM.train()
     elif args.action == 'test':
