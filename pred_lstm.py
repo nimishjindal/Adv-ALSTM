@@ -583,7 +583,8 @@ class AWLSTM:
                 "Test_Accuracy": cur_test_perf['acc'],
                 "Test loss": test_loss,
                 'Val loss:': val_loss,
-                'Train per:': tra_acc / bat_count
+                'Train per:': tra_acc / bat_count,
+                'mcc': cur_valid_perf['mcc']
             }
 
             wandb.log(wandb_dict)
