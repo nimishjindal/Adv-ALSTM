@@ -635,6 +635,13 @@ def init_wandb(name):
         config=None  ### Wandb Config for your run
     )
 
+import debugpy
+
+debugpy.listen(('0.0.0.0', 5678))
+
+print("Waiting for debugger to attach...")
+debugpy.wait_for_client()
+
 if __name__ == '__main__':
     desc = 'the lstm model'
     parser = argparse.ArgumentParser(description=desc)

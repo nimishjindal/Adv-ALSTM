@@ -3,5 +3,4 @@ numpy==1.14.5
 tensorflow==1.8.0
 scipy
 Scikit-learn==0.19
-
-
+debugpy
