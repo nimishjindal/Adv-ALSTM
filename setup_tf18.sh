@@ -12,3 +12,6 @@ source ~/miniconda3/etc/profile.d/conda.sh
 conda init
 
 conda create -n adv python=3.6
+
+git config --global user.email nimish.jindal@yahoo.com
+git config --global user.name Nimish Jindal

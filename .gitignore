@@ -1,1 +1,5 @@
 /.idea
+/wandb
+/__pycache__
+/tmp
+tmp/model.index
