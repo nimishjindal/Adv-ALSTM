@@ -15,3 +15,8 @@ ALSTM:
     python pred_lstm.py -p ./data/kdd17/ourpped/ -l 15 -u 16 -l2 0.001 -f 1
 Adv-ALSTM:
     python pred_lstm.py -p ./data/kdd17/ourpped/ -l 15 -u 16 -l2 0.001 -v 1 -rl 1 -q ./saved_model/kdd17_alstm/model -la 0.05 -le 0.001 -f 1
+
+
+
+python pred_lstm.py -l 5 -u 4 -a 1 -l2 1 -v 1 -la 0.01 -le 0.05 -rl 0 -hi 1
+python pred_lstm.py -p ./data/kdd17/ourpped/ -l 15 -u 16 -l2 0.001 -v 1 -rl 0 -la 0.05 -le 0.001 -f 1

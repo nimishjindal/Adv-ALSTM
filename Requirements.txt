@@ -1,4 +1,4 @@
-wandb
+wandb==0.15.11
 numpy==1.14.5
 tensorflow==1.8.0
 scipy
