@@ -11,7 +11,7 @@ rm -rf ~/miniconda3/miniconda.sh
 source ~/miniconda3/etc/profile.d/conda.sh
 conda init
 
-conda create -n adv python=3.6
+conda create -n adv python=3.6 -y
 
 git config --global user.email nimish.jindal@yahoo.com
 git config --global user.name Nimish Jindal
